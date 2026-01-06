@@ -20,34 +20,25 @@ const MODELS = [
 
 const ModelSelector = ({ selectedModel, onModelChange }) => {
   return (
-    <div className="mcm-card p-6 relative overflow-hidden">
-      {/* Decorative element */}
-      <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#6B7B4C] rounded-full opacity-15 pointer-events-none" />
-
-      <div className="section-header relative z-10">
+    <div className="mcm-card p-6">
+      <div className="section-header">
         <div className="icon-wrap">
           <Cpu size={18} className="text-[#FFFEF9]" />
         </div>
         <h2>Neural Engine</h2>
       </div>
 
-      <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 relative z-10">
+      <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
         {MODELS.map((model) => (
           <label
             key={model.id}
-            className={`group flex items-center justify-between p-4 rounded-[16px_6px_16px_6px] border-2 transition-all duration-200 cursor-pointer ${
-              selectedModel === model.id
-                ? 'bg-gradient-to-r from-[#2A7B7B]/20 to-[#3A9B9B]/10 border-[#2A7B7B] shadow-[3px_3px_0_#5D4E37]'
-                : 'bg-[#FFFEF9] border-[#5D4E37]/30 hover:border-[#5D4E37] hover:shadow-[2px_2px_0_#5D4E37]'
-            }`}
+            className={`model-option ${selectedModel === model.id ? 'selected' : ''}`}
           >
-            <div className="flex-1">
-              <div className={`text-sm font-bold transition-colors ${
-                selectedModel === model.id ? 'text-[#2A7B7B]' : 'text-[#3D3D3D] group-hover:text-[#2A7B7B]'
-              }`} style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
+            <div className="flex-1 min-w-0 mr-4">
+              <div className={`text-sm font-bold ${selectedModel === model.id ? 'text-[#2A7B7B]' : 'text-[#3D3D3D]'}`}>
                 {model.name}
               </div>
-              <div className="text-[11px] text-[#5D4E37]/70 mt-0.5 font-medium">
+              <div className="text-xs text-[#7A6B54] mt-1">
                 {model.description}
               </div>
             </div>
@@ -62,9 +53,6 @@ const ModelSelector = ({ selectedModel, onModelChange }) => {
           </label>
         ))}
       </div>
-
-      {/* Decorative starburst */}
-      <div className="absolute bottom-3 left-3 text-[#D4A72C] opacity-40 text-xl pointer-events-none">✦</div>
     </div>
   );
 };

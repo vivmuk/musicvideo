@@ -7,7 +7,6 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
     onConfigChange({ ...config, [name]: value });
   };
 
-  // Model-specific constraints based on Video Models.md
   const getDurationOptions = () => {
     if (selectedModel.includes('sora')) return [4, 6, 8, 10, 12];
     if (selectedModel.includes('wan-2.5')) return [5, 6, 7, 8, 9, 10];
@@ -32,26 +31,22 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
   const resolutionOptions = getResolutionOptions();
 
   return (
-    <div className="mcm-card p-6 relative overflow-hidden">
-      {/* Decorative boomerang */}
-      <div className="absolute -bottom-6 -right-6 w-20 h-10 bg-[#D4A72C] rounded-[40px_40px_0_0] opacity-20 transform rotate-25 pointer-events-none" />
-
-      <div className="section-header relative z-10">
+    <div className="mcm-card p-6">
+      <div className="section-header">
         <div className="icon-wrap">
           <Sliders size={18} className="text-[#FFFEF9]" />
         </div>
         <h2>Configuration</h2>
-        <span className="ml-auto text-[#2A7B7B] text-lg">✺</span>
       </div>
 
-      <div className="space-y-5 relative z-10">
+      <div className="space-y-5">
         <div>
           <label className="label-text">Aspect Ratio</label>
           <select
             name="aspect_ratio"
             value={config.aspect_ratio}
             onChange={handleChange}
-            className="input-field w-full cursor-pointer"
+            className="input-field"
           >
             <option value="16:9">16:9 (Widescreen)</option>
             <option value="9:16">9:16 (Vertical)</option>
@@ -66,7 +61,7 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
               name="duration"
               value={config.duration}
               onChange={handleChange}
-              className="input-field w-full cursor-pointer"
+              className="input-field"
             >
               {durationOptions.map(d => (
                 <option key={d} value={d}>{d}s</option>
@@ -79,7 +74,7 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
               name="resolution"
               value={config.resolution}
               onChange={handleChange}
-              className="input-field w-full cursor-pointer"
+              className="input-field"
             >
               {resolutionOptions.map(r => (
                 <option key={r} value={r}>{r}</option>
@@ -94,7 +89,7 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
             name="style_preset"
             value={config.style_preset}
             onChange={handleChange}
-            className="input-field w-full cursor-pointer"
+            className="input-field"
           >
             <option value="cinematic">Cinematic</option>
             <option value="anime">Anime</option>
@@ -103,9 +98,6 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
           </select>
         </div>
       </div>
-
-      {/* Decorative starburst */}
-      <div className="absolute top-4 right-4 text-[#6B7B4C] opacity-30 text-xl pointer-events-none">✦</div>
     </div>
   );
 };
