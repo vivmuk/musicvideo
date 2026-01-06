@@ -1,5 +1,5 @@
 import React from 'react';
-import { Video } from 'lucide-react';
+import { Cpu } from 'lucide-react';
 
 const MODELS = [
   { id: 'veo3-fast-text-to-video', name: 'Veo3 Fast', description: 'Fast, up to 1080p, 4-8s, Audio' },
@@ -20,33 +20,44 @@ const MODELS = [
 
 const ModelSelector = ({ selectedModel, onModelChange }) => {
   return (
-    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-purple-400">
-        <Video size={20} />
-        Video Model
-      </h2>
-      <div className="space-y-3">
+    <div className="glass-card p-6">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="bg-violet-500/10 p-2 rounded-lg">
+          <Cpu size={18} className="text-violet-400" />
+        </div>
+        <h2 className="text-lg font-semibold text-white tracking-tight">
+          Neural Engine
+        </h2>
+      </div>
+      
+      <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
         {MODELS.map((model) => (
           <label
             key={model.id}
-            className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+            className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
               selectedModel === model.id
-                ? 'bg-purple-900/20 border-purple-500'
-                : 'bg-slate-900 border-slate-700 hover:border-slate-600'
+                ? 'bg-violet-500/10 border-violet-500/50 shadow-[0_0_20px_rgba(139,92,246,0.1)]'
+                : 'bg-black/20 border-white/5 hover:border-white/10 hover:bg-white/5'
             }`}
           >
+            <div className="flex-1">
+              <div className={`text-sm font-semibold transition-colors ${
+                selectedModel === model.id ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-300'
+              }`}>
+                {model.name}
+              </div>
+              <div className="text-[11px] text-zinc-500 mt-0.5 font-medium">
+                {model.description}
+              </div>
+            </div>
             <input
               type="radio"
               name="model"
               value={model.id}
               checked={selectedModel === model.id}
               onChange={(e) => onModelChange(e.target.value)}
-              className="mt-1 text-purple-500 focus:ring-purple-500"
+              className="w-4 h-4 border-2 border-zinc-700 rounded-full appearance-none checked:bg-violet-500 checked:border-violet-500 transition-all cursor-pointer"
             />
-            <div>
-              <div className="font-medium text-slate-200">{model.name}</div>
-              <div className="text-xs text-slate-400">{model.description}</div>
-            </div>
           </label>
         ))}
       </div>

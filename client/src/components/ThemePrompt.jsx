@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Loader2 } from 'lucide-react';
+import { Sparkles, Loader2, Wand2 } from 'lucide-react';
 
 const ThemePrompt = ({ onPromptGenerated, generatePrompt, loading }) => {
   const [theme, setTheme] = useState('');
@@ -17,35 +17,44 @@ const ThemePrompt = ({ onPromptGenerated, generatePrompt, loading }) => {
   };
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-blue-400">
-        <Sparkles size={20} />
-        Theme-to-Prompt Engine
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="glass-card p-8">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="bg-violet-500/10 p-2 rounded-lg">
+          <Wand2 size={20} className="text-violet-400" />
+        </div>
+        <h2 className="text-xl font-semibold text-white tracking-tight">
+          Creative Engine
+        </h2>
+      </div>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1">
-            Describe your music video theme
+          <label className="label-text">
+            Describe your vision
           </label>
           <textarea
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
             placeholder="e.g., A neon-lit cyberpunk city in the rain with flying cars and synthwave vibes..."
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[100px]"
+            className="w-full bg-black/40 border border-white/5 rounded-xl p-5 text-zinc-300 focus:ring-2 focus:ring-violet-500/50 outline-none transition-all min-h-[120px] resize-none placeholder:text-zinc-600"
           />
         </div>
+        
         <button
           type="submit"
           disabled={loading || !theme.trim()}
-          className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+          className="btn-primary w-full flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-violet-600"
         >
           {loading ? (
             <>
               <Loader2 className="animate-spin" size={18} />
-              Generating Prompt...
+              <span>Architecting Prompt...</span>
             </>
           ) : (
-            'Generate Cinematic Prompt'
+            <>
+              <Sparkles size={18} />
+              <span>Generate Cinematic Prompt</span>
+            </>
           )}
         </button>
       </form>

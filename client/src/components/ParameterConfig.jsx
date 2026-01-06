@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings2 } from 'lucide-react';
+import { Settings2, Sliders } from 'lucide-react';
 
 const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
   const handleChange = (e) => {
@@ -32,72 +32,75 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
   const resolutionOptions = getResolutionOptions();
 
   return (
-    <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg">
-      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-emerald-400">
-        <Settings2 size={20} />
-        Parameters
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1">
-            Aspect Ratio
-          </label>
-          <select
-            name="aspect_ratio"
-            value={config.aspect_ratio}
-            onChange={handleChange}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-          >
-            <option value="16:9">16:9 (Widescreen)</option>
-            <option value="9:16">9:16 (Vertical)</option>
-            <option value="1:1">1:1 (Square)</option>
-          </select>
+    <div className="glass-card p-6">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="bg-violet-500/10 p-2 rounded-lg">
+          <Sliders size={18} className="text-violet-400" />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1">
-            Duration
-          </label>
-          <select
-            name="duration"
-            value={config.duration}
-            onChange={handleChange}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-          >
-            {durationOptions.map(d => (
-              <option key={d} value={d}>{d} Seconds</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1">
-            Resolution
-          </label>
-          <select
-            name="resolution"
-            value={config.resolution}
-            onChange={handleChange}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-          >
-            {resolutionOptions.map(r => (
-              <option key={r} value={r}>{r}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-slate-400 mb-1">
-            Style Preset
-          </label>
-          <select
-            name="style_preset"
-            value={config.style_preset}
-            onChange={handleChange}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none"
-          >
-            <option value="cinematic">Cinematic</option>
-            <option value="anime">Anime</option>
-            <option value="3d-model">3D Model</option>
-            <option value="digital-art">Digital Art</option>
-          </select>
+        <h2 className="text-lg font-semibold text-white tracking-tight">
+          Configuration
+        </h2>
+      </div>
+      
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 gap-6">
+          <div>
+            <label className="label-text">Aspect Ratio</label>
+            <select
+              name="aspect_ratio"
+              value={config.aspect_ratio}
+              onChange={handleChange}
+              className="input-field w-full appearance-none cursor-pointer"
+            >
+              <option value="16:9">16:9 (Widescreen)</option>
+              <option value="9:16">9:16 (Vertical)</option>
+              <option value="1:1">1:1 (Square)</option>
+            </select>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="label-text">Duration</label>
+              <select
+                name="duration"
+                value={config.duration}
+                onChange={handleChange}
+                className="input-field w-full appearance-none cursor-pointer"
+              >
+                {durationOptions.map(d => (
+                  <option key={d} value={d}>{d}s</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="label-text">Resolution</label>
+              <select
+                name="resolution"
+                value={config.resolution}
+                onChange={handleChange}
+                className="input-field w-full appearance-none cursor-pointer"
+              >
+                {resolutionOptions.map(r => (
+                  <option key={r} value={r}>{r}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="label-text">Style Preset</label>
+            <select
+              name="style_preset"
+              value={config.style_preset}
+              onChange={handleChange}
+              className="input-field w-full appearance-none cursor-pointer"
+            >
+              <option value="cinematic">Cinematic</option>
+              <option value="anime">Anime</option>
+              <option value="3d-model">3D Model</option>
+              <option value="digital-art">Digital Art</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>

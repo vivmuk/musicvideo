@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Music, Send, AlertCircle } from 'lucide-react';
+import { Music, Send, AlertCircle, Sparkles } from 'lucide-react';
 import { useVeniceApi } from './hooks/useVeniceApi';
 import ThemePrompt from './components/ThemePrompt';
 import ModelSelector from './components/ModelSelector';
@@ -91,30 +91,34 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8">
-      <header className="max-w-7xl mx-auto mb-12 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="bg-blue-600 p-2 rounded-lg">
-            <Music size={32} className="text-white" />
+    <div className="min-h-screen p-4 md:p-8 lg:p-12">
+      <header className="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex items-center gap-4">
+          <div className="bg-violet-600/20 p-3 rounded-2xl border border-violet-500/20">
+            <Music size={32} className="text-violet-500" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Venice Music Video Studio</h1>
-            <p className="text-slate-400 text-sm">AI-Powered Cinematic Video Generation</p>
+            <h1 className="text-4xl font-semibold tracking-tight text-white">Venice</h1>
+            <p className="text-zinc-500 font-medium">Music Video Studio</p>
           </div>
+        </div>
+        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
+          <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+          <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">System Online</span>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto">
         {error && (
-          <div className="mb-6 bg-red-900/20 border border-red-500/50 p-4 rounded-lg flex items-center gap-3 text-red-400">
+          <div className="mb-8 bg-red-500/10 border border-red-500/20 p-4 rounded-2xl flex items-center gap-3 text-red-400 animate-in fade-in slide-in-from-top-2">
             <AlertCircle size={20} />
-            <p>{error}</p>
+            <p className="text-sm font-medium">{error}</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Input & Config */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-8 space-y-12">
             <ThemePrompt 
               onPromptGenerated={handlePromptGenerated} 
               generatePrompt={generatePrompt}
@@ -122,20 +126,24 @@ function App() {
             />
 
             {generatedPrompt && (
-              <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h2 className="text-xl font-semibold mb-4 text-blue-400">Generated Prompt</h2>
+              <div className="glass-card p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center gap-2 mb-6">
+                  <Sparkles size={18} className="text-violet-400" />
+                  <h2 className="text-lg font-semibold text-white">Refine Prompt</h2>
+                </div>
                 <textarea
                   value={generatedPrompt}
                   onChange={(e) => setGeneratedPrompt(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg p-4 text-slate-300 focus:ring-2 focus:ring-blue-500 outline-none min-h-[120px] mb-4"
+                  className="w-full bg-black/40 border border-white/5 rounded-xl p-5 text-zinc-300 focus:ring-2 focus:ring-violet-500/50 outline-none min-h-[160px] mb-6 transition-all resize-none"
+                  placeholder="Your generated prompt will appear here..."
                 />
                 <button
                   onClick={handleQueueVideo}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20"
+                  className="btn-primary w-full flex items-center justify-center gap-3"
                 >
-                  <Send size={20} />
-                  Queue Video Generation
+                  <Send size={18} />
+                  Generate Video
                 </button>
               </div>
             )}
@@ -144,7 +152,7 @@ function App() {
           </div>
 
           {/* Right Column: Settings & Queue */}
-          <div className="space-y-8">
+          <div className="lg:col-span-4 space-y-12">
             <ModelSelector 
               selectedModel={selectedModel} 
               onModelChange={setSelectedModel} 
@@ -159,8 +167,14 @@ function App() {
         </div>
       </main>
 
-      <footer className="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
-        &copy; 2026 Venice Music Video Studio. Powered by Venice AI.
+      <footer className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 text-sm font-medium">
+        <p>&copy; 2026 Venice Music Video Studio</p>
+        <div className="flex items-center gap-6">
+          <span className="hover:text-zinc-300 cursor-pointer transition-colors">Terms</span>
+          <span className="hover:text-zinc-300 cursor-pointer transition-colors">Privacy</span>
+          <span className="text-zinc-700">|</span>
+          <span className="text-zinc-400">Powered by Venice AI</span>
+        </div>
       </footer>
     </div>
   );
