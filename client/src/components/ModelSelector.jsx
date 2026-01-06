@@ -20,33 +20,34 @@ const MODELS = [
 
 const ModelSelector = ({ selectedModel, onModelChange }) => {
   return (
-    <div className="glass-card p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="bg-violet-500/10 p-2 rounded-lg">
-          <Cpu size={18} className="text-violet-400" />
+    <div className="mcm-card p-6 relative overflow-hidden">
+      {/* Decorative element */}
+      <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#6B7B4C] rounded-full opacity-15 pointer-events-none" />
+
+      <div className="section-header relative z-10">
+        <div className="icon-wrap">
+          <Cpu size={18} className="text-[#FFFEF9]" />
         </div>
-        <h2 className="text-lg font-semibold text-white tracking-tight">
-          Neural Engine
-        </h2>
+        <h2>Neural Engine</h2>
       </div>
-      
-      <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+
+      <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 relative z-10">
         {MODELS.map((model) => (
           <label
             key={model.id}
-            className={`group flex items-center justify-between p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
+            className={`group flex items-center justify-between p-4 rounded-[16px_6px_16px_6px] border-2 transition-all duration-200 cursor-pointer ${
               selectedModel === model.id
-                ? 'bg-violet-500/10 border-violet-500/50 shadow-[0_0_20px_rgba(139,92,246,0.1)]'
-                : 'bg-black/20 border-white/5 hover:border-white/10 hover:bg-white/5'
+                ? 'bg-gradient-to-r from-[#2A7B7B]/20 to-[#3A9B9B]/10 border-[#2A7B7B] shadow-[3px_3px_0_#5D4E37]'
+                : 'bg-[#FFFEF9] border-[#5D4E37]/30 hover:border-[#5D4E37] hover:shadow-[2px_2px_0_#5D4E37]'
             }`}
           >
             <div className="flex-1">
-              <div className={`text-sm font-semibold transition-colors ${
-                selectedModel === model.id ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-300'
-              }`}>
+              <div className={`text-sm font-bold transition-colors ${
+                selectedModel === model.id ? 'text-[#2A7B7B]' : 'text-[#3D3D3D] group-hover:text-[#2A7B7B]'
+              }`} style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
                 {model.name}
               </div>
-              <div className="text-[11px] text-zinc-500 mt-0.5 font-medium">
+              <div className="text-[11px] text-[#5D4E37]/70 mt-0.5 font-medium">
                 {model.description}
               </div>
             </div>
@@ -56,11 +57,14 @@ const ModelSelector = ({ selectedModel, onModelChange }) => {
               value={model.id}
               checked={selectedModel === model.id}
               onChange={(e) => onModelChange(e.target.value)}
-              className="w-4 h-4 border-2 border-zinc-700 rounded-full appearance-none checked:bg-violet-500 checked:border-violet-500 transition-all cursor-pointer"
+              className="mcm-radio"
             />
           </label>
         ))}
       </div>
+
+      {/* Decorative starburst */}
+      <div className="absolute bottom-3 left-3 text-[#D4A72C] opacity-40 text-xl pointer-events-none">✦</div>
     </div>
   );
 };

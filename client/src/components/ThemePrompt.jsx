@@ -7,7 +7,7 @@ const ThemePrompt = ({ onPromptGenerated, generatePrompt, loading }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!theme.trim()) return;
-    
+
     try {
       const prompt = await generatePrompt(theme);
       onPromptGenerated(prompt);
@@ -17,38 +17,43 @@ const ThemePrompt = ({ onPromptGenerated, generatePrompt, loading }) => {
   };
 
   return (
-    <div className="glass-card p-8">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="bg-violet-500/10 p-2 rounded-lg">
-          <Wand2 size={20} className="text-violet-400" />
+    <div className="mcm-card p-8 relative overflow-hidden">
+      {/* Decorative boomerang shape */}
+      <div className="absolute -top-6 -right-6 w-24 h-12 bg-[#2A7B7B] rounded-[60px_60px_0_0] opacity-20 transform -rotate-25 pointer-events-none" />
+
+      {/* Decorative kidney bean */}
+      <div className="absolute -bottom-8 -left-8 w-32 h-16 bg-[#D4A72C] rounded-[60px_60px_60px_15px] opacity-15 transform rotate-15 pointer-events-none" />
+
+      <div className="section-header relative z-10">
+        <div className="icon-wrap">
+          <Wand2 size={20} className="text-[#FFFEF9]" />
         </div>
-        <h2 className="text-xl font-semibold text-white tracking-tight">
-          Creative Engine
-        </h2>
+        <h2>Creative Engine</h2>
+        <span className="ml-auto text-[#D4A72C] text-xl">✦</span>
       </div>
-      
-      <form onSubmit={handleSubmit} className="space-y-6">
+
+      <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
         <div>
           <label className="label-text">
-            Describe your vision
+            Describe Your Vision
           </label>
           <textarea
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            placeholder="e.g., A neon-lit cyberpunk city in the rain with flying cars and synthwave vibes..."
-            className="w-full bg-black/40 border border-white/5 rounded-xl p-5 text-zinc-300 focus:ring-2 focus:ring-violet-500/50 outline-none transition-all min-h-[120px] resize-none placeholder:text-zinc-600"
+            placeholder="e.g., A sunny California beach scene with vintage cars, palm trees swaying, and couples dancing to rock and roll..."
+            className="w-full input-field min-h-[140px] resize-none"
           />
         </div>
-        
+
         <button
           type="submit"
           disabled={loading || !theme.trim()}
-          className="btn-primary w-full flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-violet-600"
+          className="btn-primary w-full flex items-center justify-center gap-3"
         >
           {loading ? (
             <>
               <Loader2 className="animate-spin" size={18} />
-              <span>Architecting Prompt...</span>
+              <span>Crafting Your Prompt...</span>
             </>
           ) : (
             <>
@@ -58,6 +63,9 @@ const ThemePrompt = ({ onPromptGenerated, generatePrompt, loading }) => {
           )}
         </button>
       </form>
+
+      {/* Decorative starburst */}
+      <div className="absolute bottom-4 right-4 text-[#6B7B4C] opacity-30 text-3xl pointer-events-none">✺</div>
     </div>
   );
 };

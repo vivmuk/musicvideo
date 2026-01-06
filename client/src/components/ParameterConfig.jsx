@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings2, Sliders } from 'lucide-react';
+import { Sliders } from 'lucide-react';
 
 const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
   const handleChange = (e) => {
@@ -32,77 +32,80 @@ const ParameterConfig = ({ config, onConfigChange, selectedModel }) => {
   const resolutionOptions = getResolutionOptions();
 
   return (
-    <div className="glass-card p-6">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="bg-violet-500/10 p-2 rounded-lg">
-          <Sliders size={18} className="text-violet-400" />
-        </div>
-        <h2 className="text-lg font-semibold text-white tracking-tight">
-          Configuration
-        </h2>
-      </div>
-      
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 gap-6">
-          <div>
-            <label className="label-text">Aspect Ratio</label>
-            <select
-              name="aspect_ratio"
-              value={config.aspect_ratio}
-              onChange={handleChange}
-              className="input-field w-full appearance-none cursor-pointer"
-            >
-              <option value="16:9">16:9 (Widescreen)</option>
-              <option value="9:16">9:16 (Vertical)</option>
-              <option value="1:1">1:1 (Square)</option>
-            </select>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="label-text">Duration</label>
-              <select
-                name="duration"
-                value={config.duration}
-                onChange={handleChange}
-                className="input-field w-full appearance-none cursor-pointer"
-              >
-                {durationOptions.map(d => (
-                  <option key={d} value={d}>{d}s</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="label-text">Resolution</label>
-              <select
-                name="resolution"
-                value={config.resolution}
-                onChange={handleChange}
-                className="input-field w-full appearance-none cursor-pointer"
-              >
-                {resolutionOptions.map(r => (
-                  <option key={r} value={r}>{r}</option>
-                ))}
-              </select>
-            </div>
-          </div>
+    <div className="mcm-card p-6 relative overflow-hidden">
+      {/* Decorative boomerang */}
+      <div className="absolute -bottom-6 -right-6 w-20 h-10 bg-[#D4A72C] rounded-[40px_40px_0_0] opacity-20 transform rotate-25 pointer-events-none" />
 
+      <div className="section-header relative z-10">
+        <div className="icon-wrap">
+          <Sliders size={18} className="text-[#FFFEF9]" />
+        </div>
+        <h2>Configuration</h2>
+        <span className="ml-auto text-[#2A7B7B] text-lg">✺</span>
+      </div>
+
+      <div className="space-y-5 relative z-10">
+        <div>
+          <label className="label-text">Aspect Ratio</label>
+          <select
+            name="aspect_ratio"
+            value={config.aspect_ratio}
+            onChange={handleChange}
+            className="input-field w-full cursor-pointer"
+          >
+            <option value="16:9">16:9 (Widescreen)</option>
+            <option value="9:16">9:16 (Vertical)</option>
+            <option value="1:1">1:1 (Square)</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label-text">Style Preset</label>
+            <label className="label-text">Duration</label>
             <select
-              name="style_preset"
-              value={config.style_preset}
+              name="duration"
+              value={config.duration}
               onChange={handleChange}
-              className="input-field w-full appearance-none cursor-pointer"
+              className="input-field w-full cursor-pointer"
             >
-              <option value="cinematic">Cinematic</option>
-              <option value="anime">Anime</option>
-              <option value="3d-model">3D Model</option>
-              <option value="digital-art">Digital Art</option>
+              {durationOptions.map(d => (
+                <option key={d} value={d}>{d}s</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="label-text">Resolution</label>
+            <select
+              name="resolution"
+              value={config.resolution}
+              onChange={handleChange}
+              className="input-field w-full cursor-pointer"
+            >
+              {resolutionOptions.map(r => (
+                <option key={r} value={r}>{r}</option>
+              ))}
             </select>
           </div>
         </div>
+
+        <div>
+          <label className="label-text">Style Preset</label>
+          <select
+            name="style_preset"
+            value={config.style_preset}
+            onChange={handleChange}
+            className="input-field w-full cursor-pointer"
+          >
+            <option value="cinematic">Cinematic</option>
+            <option value="anime">Anime</option>
+            <option value="3d-model">3D Model</option>
+            <option value="digital-art">Digital Art</option>
+          </select>
+        </div>
       </div>
+
+      {/* Decorative starburst */}
+      <div className="absolute top-4 right-4 text-[#6B7B4C] opacity-30 text-xl pointer-events-none">✦</div>
     </div>
   );
 };
